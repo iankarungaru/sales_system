@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 50px;
+            text-align: center;
+        }
+        .logout-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="logout-message">
+                    <p>You have successfully logged out.</p>
+                </div>
+                <p><a href="/login" class="btn btn-primary">Login Again</a></p>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
