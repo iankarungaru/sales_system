@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+  body {
+    background-image: url("/static/images/lightgreen.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .chart-container {
+    width: 50%;
+    margin: auto;
+  }
+</style>
+
+<!-- Your dashboard content goes here -->
+<div class="chart-container">
+    <canvas id="daily-sales-chart" width="800" height="450"></canvas>
+</div>
+<div class="chart-container">
+    <canvas id="profit-chart" width="800" height="450"></canvas>
+</div>
+
+<!-- JavaScript code for charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+  // Data from Flask passed to template for daily sales chart
+  var days_sales = {{ days_sales|tojson }};
+  var sales = {{ sales|tojson }};
+
+  // Data for the daily sales chart
+  var dailySalesChartData = {
+      labels: days_sales,
+      datasets: [
+          {
+              label: "Daily Sales",
+              backgroundColor: "#3e95cd",
+              data: sales
+          }
+      ]
+  };
+
+  // Chart.js code to render the daily sales chart
+  new Chart(document.getElementById("daily-sales-chart"), {
+      type: 'line',
+      data: dailySalesChartData,
+      options: {
+          scales: {
+              yAxes: [{
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Sales'
+                  },
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }],
+              xAxes: [{
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Day'
+                  }
+              }]
+          }
+      }
+  });
+
+  // Data from Flask passed to template for profit chart
+  var names_profit = {{ names_profit|tojson }};
+  var profits = {{ profits|tojson }};
+
+  // Data for the profit chart
+  var profitChartData = {
+      labels: names_profit,
+      datasets: [
+          {
+              label: "Total Profit",
+              backgroundColor: "#8e5ea2",
+              data: profits
+          }
+      ]
+  };
+
+  // Chart.js code to render the profit chart
+  new Chart(document.getElementById("profit-chart"), {
+      type: 'bar',
+      data: profitChartData,
+      options: {
+          scales: {
+              yAxes: [{
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Profit'
+                  },
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }],
+              xAxes: [{
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Product'
+                  }
+              }]
+          }
+      }
+  });
+</script>
+{% endblock %}

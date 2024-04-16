@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login or Register</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* Custom CSS */
+        body {
+            background-image: url("/static/images/loginregister.jpg"); /* Replace 'background-image.jpg' with your image path */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: rgba(0, 0, 0, 0.5); /* Translucent overlay */
+        }
+
+        h1 {
+            text-align: center;
+            color: darkgreen; /* Font color */
+            margin-bottom: 40px; /* Adjust margin as needed */
+        }
+
+        .login-register-form {
+            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .login-register-form form {
+            margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        .login-register-form h2 {
+            font-size: 24px; /* Adjust font size */
+            font-family: Arial, sans-serif; /* Change font family */
+            color: #000; /* Font color */
+            text-align: center;
+            margin-bottom: 20px; /* Adjust margin as needed */
+        }
+
+        /* Enlarge the links */
+        .text-large {
+            font-size: 40px;
+            font-weight: bold;
+            color: darkgreen;
+        }
+        
+        /* Social icons */
+        .social-icons a {
+            color: darkgreen; /* Set color to dark green */
+            margin-right: 10px; /* Adjust margin between icons */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WELCOME TO MYDUKA!</h1>
+        <!-- Links to toggle between login and register forms -->
+        <div class="text-center mb-3">
+            <a href="#" id="showRegisterForm" class="text-large">Register</a> |
+            <a href="#" id="showLoginForm" class="text-large">Login</a>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Registration Form -->
+                <div class="login-register-form" id="registerFormContainer" style="display: none;">
+                    <h2>Register</h2>
+                    <form id="registerForm" action="/register" method="POST">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="fullname"
+                                name="fullname"
+                                placeholder="Enter full name"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                placeholder="Enter email"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                required
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Login Form -->
+                <div class="login-register-form" id="loginFormContainer" style="display: none;">
+                    <h2>Login</h2>
+                    <form id="loginForm" action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="login_email">Email address</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="login_email"
+                                name="login_email"
+                                placeholder="Enter email"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="login_password">Password</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="login_password"
+                                name="login_password"
+                                placeholder="Password"
+                                required
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Social Icons -->
+    <div class="social-icons text-center mt-3">
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Show registration form and hide login form by default
+            $('#showRegisterForm').click(function () {
+                $('#registerFormContainer').show();
+                $('#loginFormContainer').hide();
+                return false;
+            });
+
+            // Show login form and hide registration form
+            $('#showLoginForm').click(function () {
+                $('#loginFormContainer').show();
+                $('#registerFormContainer').hide();
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

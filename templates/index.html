@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+  .carousel-caption-custom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Add some transparency for better readability */
+    color: white; /* Text color */
+    text-align: left; /* Align text to the left */
+    max-width: 30%; /* Reduce maximum width to 30% */
+  }
+  .carousel-caption-custom h5,
+  .carousel-caption-custom p {
+    margin: 0; /* Remove default margins to ensure text touches the edges */
+    text-indent: 20px; /* Add indentation to the text */
+    font-size: 24px; /* Increase font size to 24 pixels */
+  }
+</style>
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/static/images/woman.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption-custom">
+          <h5>Welcome to MYDUKA Sales System!</h5>
+          <p> Revolutionize your selling experience with MYDUKA, a powerful and intuitive platform designed to elevate your sales game. Whether you're a small business owner or a seasoned entrepreneur, MYDUKA offers comprehensive tools to streamline your sales process and maximize your profits.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/static/images/cereal.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption-custom">
+          <p>Gain access to cutting-edge features tailored to meet your specific needs. From inventory management to customer relationship management, our system empowers you to stay organized and efficient every step of the way. Say goodbye to manual tasks and hello to automation with MYDUKA's seamless integration capabilities.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/static/images/customer.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption-custom">
+          <p>Experience the convenience of mobile access with MYDUKA's responsive design. Manage your sales on the go and never miss an opportunity to connect with your customers. Whether you're in the office, on the road, or relaxing at home, MYDUKA keeps you connected and in control.
+
+            Join the thousands of satisfied users who have chosen MYDUKA as their preferred sales system. Discover the difference for yourself and unlock your full potential with MYDUKA today!</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock %}
