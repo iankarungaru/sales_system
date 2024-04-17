@@ -29,7 +29,7 @@ Steps
 Clone the repository:
 bash
 Copy code
-git clone https://github.com/yourusername/myduka-sales-system.git
+git clone https://github.com/iankarungaru/sales_system.git
 Navigate to the project directory:
 bash
 Copy code
