@@ -1,175 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login or Register</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Font Awesome CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-    <style>
-        /* Custom CSS */
-        body {
-            background-image: url("/static/images/loginregister.jpg"); /* Replace 'background-image.jpg' with your image path */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-color: rgba(0, 0, 0, 0.5); /* Translucent overlay */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login or Register</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Custom CSS */
+    body {
+      background-image: url("/static/images/loginregister.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
 
-        h1 {
-            text-align: center;
-            color: darkgreen; /* Font color */
-            margin-bottom: 40px; /* Adjust margin as needed */
-        }
+    h1 {
+      text-align: center;
+      color: darkgreen;
+      margin-bottom: 40px;
+    }
 
-        .login-register-form {
-            background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
-            padding: 20px;
-            border-radius: 10px;
-        }
+    .login-register-form {
+      background-color: transparent;
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-        .login-register-form form {
-            margin-bottom: 20px; /* Adjust margin as needed */
-        }
+    .login-register-form form {
+      margin-bottom: 20px;
+    }
 
-        .login-register-form h2 {
-            font-size: 24px; /* Adjust font size */
-            font-family: Arial, sans-serif; /* Change font family */
-            color: #000; /* Font color */
-            text-align: center;
-            margin-bottom: 20px; /* Adjust margin as needed */
-        }
+    .login-register-form h2 {
+      font-size: 24px;
+      font-family: Arial, sans-serif;
+      color: #000;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-        /* Enlarge the links */
-        .text-large {
-            font-size: 40px;
-            font-weight: bold;
-            color: darkgreen;
-        }
-        
-        /* Social icons */
-        .social-icons a {
-            color: darkgreen; /* Set color to dark green */
-            margin-right: 10px; /* Adjust margin between icons */
-        }
-    </style>
+    .text-large {
+      font-size: 40px;
+      font-weight: bold;
+      color: darkgreen;
+    }
+
+    .social-icons a {
+      color: rgb(0, 100, 0);
+      margin-right: 10px;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgb(150, 232, 150); /* Light green background color */
+      padding: 5px 0;
+      text-align: center;
+      color: rgb(0, 100, 0);
+      z-index: 999; /* Ensure the footer is on top of other content */
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .menu-toggle i {
+      font-size: 24px;
+      color: white;
+    }
+
+    .menu {
+      position: fixed;
+      top: 70px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 5px;
+      padding: 10px;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 0 10px lightgreen;
+    }
+
+    .menu a {
+      display: block;
+      color: white;
+      margin-bottom: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: lightgreen;
+    }
+
+    .featured-products {
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 40px 0;
+    }
+
+    .featured-products h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: darkgreen;
+    }
+
+    .carousel-container {
+      max-height: calc(100vh - 300px); /* Adjust the value to fit your layout */
+      overflow-y: hidden; /* No scrollbar */
+    }
+
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>WELCOME TO MYDUKA!</h1>
-        <!-- Links to toggle between login and register forms -->
-        <div class="text-center mb-3">
-            <a href="#" id="showRegisterForm" class="text-large">Register</a> |
-            <a href="#" id="showLoginForm" class="text-large">Login</a>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <!-- Registration Form -->
-                <div class="login-register-form" id="registerFormContainer" style="display: none;">
-                    <h2>Register</h2>
-                    <form id="registerForm" action="/register" method="POST">
-                        <div class="form-group">
-                            <label for="fullname">Full Name</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="fullname"
-                                name="fullname"
-                                placeholder="Enter full name"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input
-                                type="email"
-                                class="form-control"
-                                id="email"
-                                name="email"
-                                placeholder="Enter email"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input
-                                type="password"
-                                class="form-control"
-                                id="password"
-                                name="password"
-                                placeholder="Password"
-                                required
-                            />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <!-- Login Form -->
-                <div class="login-register-form" id="loginFormContainer" style="display: none;">
-                    <h2>Login</h2>
-                    <form id="loginForm" action="/login" method="POST">
-                        <div class="form-group">
-                            <label for="login_email">Email address</label>
-                            <input
-                                type="email"
-                                class="form-control"
-                                id="login_email"
-                                name="login_email"
-                                placeholder="Enter email"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="login_password">Password</label>
-                            <input
-                                type="password"
-                                class="form-control"
-                                id="login_password"
-                                name="login_password"
-                                placeholder="Password"
-                                required
-                            />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="container">
+  <h1>WELCOME TO MYDUKA!</h1>
+  <!-- Hamburger Menu -->
+  <div class="menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="menu" id="menu">
+    <a href="#" id="showRegisterFormMobile">Register</a>
+    <a href="#" id="showLoginFormMobile">Login</a>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <!-- Registration Form -->
+      <div class="login-register-form" id="registerFormContainer" style="display: none">
+        <h2>Register</h2>
+        <form id="registerForm" action="/register" method="POST">
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter full name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
     </div>
-    
-    <!-- Social Icons -->
-    <div class="social-icons text-center mt-3">
-        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
-        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
-        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+    <div class="col-md-6">
+      <!-- Login Form -->
+      <div class="login-register-form" id="loginFormContainer" style="display: none">
+        <h2>Login</h2>
+        <form id="loginForm" action="/login" method="POST">
+          <div class="form-group">
+            <label for="login_email">Email address</label>
+            <input type="email" class="form-control" id="login_email" name="login_email" placeholder="Enter email" required />
+          </div>
+          <div class="form-group">
+            <label for="login_password">Password</label>
+            <input type="password" class="form-control" id="login_password" name="login_password" placeholder="Password" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Font Awesome JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Show registration form and hide login form by default
-            $('#showRegisterForm').click(function () {
-                $('#registerFormContainer').show();
-                $('#loginFormContainer').hide();
-                return false;
-            });
+<!-- Featured Products Section -->
+<section class="featured-products">
+  <div class="container">
+    <h2 class="text-center">Featured Products</h2>
+    <!-- First Row of Three Cards -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="/static/images/ps5.jpg" alt="Playstation 5">
+          <div class="card-body">
+            <h5 class="card-title">Playstation 5</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="/static/images/samsungtv.jpg" alt="Samsung TV">
+          <div class="card-body">
+            <h5 class="card-title">Samsung TV</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="/static/images/hometheatre.jpg" alt="Home Theatre">
+          <div class="card-body">
+            <h5 class="card-title">Home Theatre</h5>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Second Row of Three Cards -->
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="/static/images/washing.jpg" alt="Washing Machine">
+          <div class="card-body">
+            <h5 class="card-title">Washing Machine</h5>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="/static/images/Mika.jpg" alt="Mika Fridge">
+          <div class="card-body">
+            <h5 class="card-title">Mika Fridge</h5>
+           
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="/static/images/hp.jpg" alt="HP chromebook">
+          <div class="card-body">
+            <h5 class="card-title">HP chromebook</h5>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            // Show login form and hide registration form
-            $('#showLoginForm').click(function () {
-                $('#loginFormContainer').show();
-                $('#registerFormContainer').hide();
-                return false;
-            });
-        });
-    </script>
+<!-- Footer with Social Icons -->
+<footer>
+  <div class="social-icons">
+    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+    <!-- Replacing Twitter icon with X icon -->
+    <a href="https://www.twitter.com" target="_blank"><i class="fas fa-times fa-2x"></i></a>
+    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Font Awesome JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#showRegisterForm").click(function () {
+      $("#registerFormContainer").show();
+      $("#loginFormContainer").hide();
+      return false;
+    });
+
+    $("#showLoginForm").click(function () {
+      $("#loginFormContainer").show();
+      $("#registerFormContainer").hide();
+      return false;
+    });
+
+    $("#showRegisterFormMobile").click(function () {
+      $("#menu").hide();
+      $("#registerFormContainer").show();
+      $("#loginFormContainer").hide();
+      return false;
+    });
+
+    $("#showLoginFormMobile").click(function () {
+      $("#menu").hide();
+      $("#loginFormContainer").show();
+      $("#registerFormContainer").hide();
+      return false;
+    });
+
+    $("#menuToggle").click(function () {
+      $("#menu").toggle();
+    });
+
+    $(document).on("click", function (e) {
+      if (
+        !$(e.target).closest("#menuToggle").length &&
+        !$(e.target).closest("#menu").length
+      ) {
+        $("#menu").hide();
+      }
+      if (
+        !$(e.target).closest(".login-register-form").length &&
+        !$(e.target).is(".text-large")
+      ) {
+        $(".login-register-form").hide();
+      }
+    });
+  });
+</script>
 </body>
 </html>
